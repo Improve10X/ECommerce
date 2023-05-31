@@ -29,7 +29,7 @@ public class CategoryActivity extends AppCompatActivity {
         //setUpData();
         setUpCategoryRv();
         setUpAdapter();
-        fetchCategoryItems();
+       // fetchCategoryItems();
     }
 
     private void setUpAdapter() {
