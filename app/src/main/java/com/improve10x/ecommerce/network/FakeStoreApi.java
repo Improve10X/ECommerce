@@ -1,4 +1,6 @@
-package com.improve10x.ecommerce;
+package com.improve10x.ecommerce.network;
+
+import com.improve10x.ecommerce.category.Constants;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

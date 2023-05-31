@@ -1,10 +1,12 @@
-package com.improve10x.ecommerce;
+package com.improve10x.ecommerce.category;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 
+import com.improve10x.ecommerce.network.FakeStoreApi;
+import com.improve10x.ecommerce.network.FakeStoreService;
 import com.improve10x.ecommerce.databinding.ActivityCategoryBinding;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class CategoryActivity extends AppCompatActivity {
         //setUpData();
         setUpCategoryRv();
         setUpAdapter();
-       // fetchCategoryItems();
+        fetchCategoryItems();
     }
 
     private void setUpAdapter() {
@@ -72,7 +74,6 @@ public class CategoryActivity extends AppCompatActivity {
                 categoryAdapter.setUpData(strings);
 
             }
-
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
 

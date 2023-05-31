@@ -1,8 +1,10 @@
-package com.improve10x.ecommerce;
+package com.improve10x.ecommerce.category;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.improve10x.ecommerce.R;
 
 public class MainActivity extends AppCompatActivity {
 

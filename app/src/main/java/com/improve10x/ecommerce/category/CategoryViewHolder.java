@@ -1,4 +1,4 @@
-package com.improve10x.ecommerce;
+package com.improve10x.ecommerce.category;
 
 import android.view.View;
 

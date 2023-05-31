@@ -1,10 +1,13 @@
-package com.improve10x.ecommerce;
+package com.improve10x.ecommerce.category;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.improve10x.ecommerce.R;
+import com.improve10x.ecommerce.category.CategoryActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
