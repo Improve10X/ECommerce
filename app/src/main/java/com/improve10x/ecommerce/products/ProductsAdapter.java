@@ -6,19 +6,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.improve10x.ecommerce.category.CategoryViewHolder;
-import com.improve10x.ecommerce.products.OnItemActionListener;
 import com.improve10x.ecommerce.databinding.ProductsItemXmlBinding;
 import com.improve10x.ecommerce.modelclass.Product;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsViewHolder> {
 
-    public List<Product> products;
-    public OnItemActionListener onItemActionListener;
+    private List<Product> products;
+    private OnItemActionListener onItemActionListener;
 
     public void setUpData(List<Product> products) {
         this.products = products;
@@ -41,12 +38,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
         Product product = products.get(position);
-        Picasso.get().load(product.imageUrl).into(holder.binding.imageViewImg);
+        Picasso.get().load(product.getImageUrl()).into(holder.binding.imageViewImg);
         holder.binding.titleTxt.setText(product.getTitle());
-        holder.binding.countTxt.setText(String.valueOf(product.rating.count));
-        holder.binding.priceTxt.setText(String.valueOf(product.price));
+        holder.binding.countTxt.setText(String.valueOf(product.rating.getCount()));
+        holder.binding.priceTxt.setText(String.valueOf(product.getPrice()));
+        holder.binding.ratingBarRb.setRating(product.rating.getRate());
         holder.binding.getRoot().setOnClickListener(v -> {
-            onItemActionListener.onClicked(product.getId());
+            onItemActionListener.onClick(product.getId());
 
         });
     }

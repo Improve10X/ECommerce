@@ -42,9 +42,9 @@ public class CategoryActivity extends AppCompatActivity {
         binding.categoryRv.setAdapter(categoryAdapter);
         categoryAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
-            public void onItemClicked(String categoryName) {
+            public void onClick(String categoryName) {
                 Intent intent = new Intent(CategoryActivity.this, ProductsActivity.class);
-                intent.putExtra("category", categoryName);
+                intent.putExtra(Constants.KEY_CATEGORY_VALUE, categoryName);
                 startActivity(intent);
             }
         });
@@ -57,7 +57,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     private void fetchCategoryItems() {
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
-        fakeStoreService = fakeStoreApi.createCategoryService();
+        fakeStoreService = fakeStoreApi.createFakeStoreService();
         Call<List<String>> call = fakeStoreService.fetchCategoryItems();
         call.enqueue(new Callback<List<String>>() {
             @Override

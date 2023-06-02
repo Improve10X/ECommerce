@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.improve10x.ecommerce.category.Constants;
 import com.improve10x.ecommerce.databinding.ActivityProductDetailsBinding;
 import com.improve10x.ecommerce.modelclass.Product;
 import com.improve10x.ecommerce.network.FakeStoreApi;
@@ -16,8 +17,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductDetailsActivity extends AppCompatActivity {
-    ActivityProductDetailsBinding binding;
-    int productId;
+    private ActivityProductDetailsBinding binding;
+    private int productId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,26 +26,26 @@ public class ProductDetailsActivity extends AppCompatActivity {
         binding = ActivityProductDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Product Details");
-        if (getIntent().hasExtra("productId")) {
-            productId = getIntent().getIntExtra("productId", 0);
+        if (getIntent().hasExtra(Constants.PRODUCT_KEY_VALUE)) {
+            productId = getIntent().getIntExtra(Constants.PRODUCT_KEY_VALUE, 0);
         }
         fetchProductDetails();
     }
 
     private void fetchProductDetails() {
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
-        FakeStoreService fakeStoreService = fakeStoreApi.createCategoryService();
+        FakeStoreService fakeStoreService = fakeStoreApi.createFakeStoreService();
         Call<Product> call = fakeStoreService.getProductDetails(productId);
         call.enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
-                Toast.makeText(ProductDetailsActivity.this, "Successfully fetched The Product Details", Toast.LENGTH_SHORT).show();
                 Product product = response.body();
                 binding.titleTxt.setText(product.getTitle());
-                binding.priceTxt.setText(String.valueOf(product.price));
-                binding.descriptionTxt.setText(product.description);
-                binding.detailsRatingbarRv.setRating(product.rating.getRate());
-                Picasso.get().load(product.imageUrl).into(binding.imageViewImg);
+                binding.priceTxt.setText(String.valueOf(product.getPrice()));
+                binding.descriptionTxt.setText(product.getDescription());
+                binding.detailsRatingbarRv.setRating( product.rating.getRate());
+                binding.countTxt.setText(product.rating.getCount());
+                Picasso.get().load(product.getImageUrl()).into(binding.imageViewImg);
             }
 
             @Override

@@ -27,7 +27,7 @@ public class ExampleUnitTest {
 
     @Test
     public void getCategoryItems() throws IOException {
-        FakeStoreService fakeStoreService = new FakeStoreApi().createCategoryService();
+        FakeStoreService fakeStoreService = new FakeStoreApi().createFakeStoreService();
         Call<List<String>> call = fakeStoreService.fetchCategoryItems();
         List<String> categories = call.execute().body();
         assertNotNull(categories);
@@ -37,7 +37,7 @@ public class ExampleUnitTest {
 
     @Test
     public void fetchProducts() throws IOException {
-        FakeStoreService fakeStoreService = new FakeStoreApi().createCategoryService();
+        FakeStoreService fakeStoreService = new FakeStoreApi().createFakeStoreService();
         Call<List<Product>> call = fakeStoreService.fetchProducts("electronics");
         List<Product> products = call.execute().body();
         assertNotNull(products);
@@ -47,7 +47,7 @@ public class ExampleUnitTest {
 
     @Test
     public void getProductDetails() throws IOException {
-        FakeStoreService fakeStoreService = new FakeStoreApi().createCategoryService();
+        FakeStoreService fakeStoreService = new FakeStoreApi().createFakeStoreService();
         Call<Product> call = fakeStoreService.getProductDetails(1);
         Product product = call.execute().body();
         assertNotNull(product);

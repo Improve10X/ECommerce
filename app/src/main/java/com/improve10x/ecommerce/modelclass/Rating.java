@@ -3,7 +3,7 @@ package com.improve10x.ecommerce.modelclass;
 public class Rating {
 
     private Float rate;
-    public Integer count;
+    private Integer count;
 
     public Float getRate() {
         return rate;

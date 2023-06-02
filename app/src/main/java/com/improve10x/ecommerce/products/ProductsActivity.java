@@ -8,8 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.improve10x.ecommerce.ProductDetailsActivity;
-import com.improve10x.ecommerce.R;
-import com.improve10x.ecommerce.category.CategoryAdapter;
+import com.improve10x.ecommerce.category.Constants;
 import com.improve10x.ecommerce.databinding.ActivityProducts2Binding;
 import com.improve10x.ecommerce.modelclass.Product;
 import com.improve10x.ecommerce.network.FakeStoreApi;
@@ -35,10 +34,9 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProducts2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        if (getIntent().hasExtra("category")) {
-            categoryName = getIntent().getStringExtra("category");
+        if (getIntent().hasExtra(Constants.KEY_CATEGORY_VALUE)) {
+            categoryName = getIntent().getStringExtra(Constants.KEY_CATEGORY_VALUE);
         }
-
         fetchData();
         setUpAdapter();
         setUpProductsRv();
@@ -46,7 +44,7 @@ public class ProductsActivity extends AppCompatActivity {
 
     private void fetchData() {
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
-        FakeStoreService fakeStoreService = fakeStoreApi.createCategoryService();
+        FakeStoreService fakeStoreService = fakeStoreApi.createFakeStoreService();
         Call<List<Product>> call = fakeStoreService.fetchProducts(categoryName);
         call.enqueue(new Callback<List<Product>>() {
             @Override
@@ -70,9 +68,9 @@ public class ProductsActivity extends AppCompatActivity {
         binding.productsRv.setAdapter(productsAdapter);
         productsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
-            public void onClicked(int productId) {
+            public void onClick(int productId) {
                 Intent intent = new Intent(getApplicationContext(), ProductDetailsActivity.class);
-                intent.putExtra("productId", productId);
+                intent.putExtra(Constants.PRODUCT_KEY_VALUE, productId);
                 startActivity(intent);
             }
         });
