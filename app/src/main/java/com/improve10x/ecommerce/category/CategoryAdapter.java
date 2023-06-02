@@ -1,5 +1,6 @@
 package com.improve10x.ecommerce.category;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -7,16 +8,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.ecommerce.databinding.CategotyItemBinding;
+import com.improve10x.ecommerce.products.ProductsActivity;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder> {
 
     public List<String> categories;
+    public OnItemActionListener onItemActionListener;
 
     public void setUpData(List<String> categoriesList) {
         categories = categoriesList;
         notifyDataSetChanged();
+    }
+
+    void setOnItemActionListener(OnItemActionListener onItemActionListener) {
+        this.onItemActionListener = onItemActionListener;
     }
 
     @NonNull
@@ -30,8 +37,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-
+        String product = categories.get(position);
         holder.binding.titleTxt.setText(categories.get(position));
+        holder.binding.getRoot().setOnClickListener(v -> {
+            onItemActionListener.onItemClicked(product);
+        });
     }
 
     @Override

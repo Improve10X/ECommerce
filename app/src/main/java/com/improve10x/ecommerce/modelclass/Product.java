@@ -4,12 +4,22 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product {
 
-    private Integer id;
-    private String title;
-    private Float price;
+    public Integer id;
+    public String title;
+    public Float price;
     @SerializedName("image")
-    private String imageUrl;
-    private Rating rating;
+    public String imageUrl;
+    public Rating rating;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String description;
 
     public Integer getId() {
         return id;

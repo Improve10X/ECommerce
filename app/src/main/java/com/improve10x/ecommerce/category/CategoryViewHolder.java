@@ -10,7 +10,6 @@ import com.improve10x.ecommerce.databinding.CategotyItemBinding;
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
 
     CategotyItemBinding binding;
-
     public CategoryViewHolder(CategotyItemBinding categotyItemBinding) {
         super(categotyItemBinding.getRoot());
         binding = categotyItemBinding;

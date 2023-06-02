@@ -3,11 +3,14 @@ package com.improve10x.ecommerce.category;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.improve10x.ecommerce.network.FakeStoreApi;
 import com.improve10x.ecommerce.network.FakeStoreService;
 import com.improve10x.ecommerce.databinding.ActivityCategoryBinding;
+import com.improve10x.ecommerce.products.ProductsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,14 @@ public class CategoryActivity extends AppCompatActivity {
         categoryAdapter = new CategoryAdapter();
         categoryAdapter.setUpData(categories);
         binding.categoryRv.setAdapter(categoryAdapter);
+        categoryAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(String categoryName) {
+                Intent intent = new Intent(getApplicationContext(), ProductsActivity.class);
+                intent.putExtra("category", categoryName);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpCategoryRv() {
@@ -72,13 +83,13 @@ public class CategoryActivity extends AppCompatActivity {
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 List<String> strings = response.body();
                 categoryAdapter.setUpData(strings);
-
+                Toast.makeText(CategoryActivity.this, "Successfully added data", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-
+                Toast.makeText(CategoryActivity.this, "Failed to Load the data", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
