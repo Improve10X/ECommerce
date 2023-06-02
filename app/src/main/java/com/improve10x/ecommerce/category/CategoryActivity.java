@@ -31,7 +31,6 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //setUpData();
         setUpCategoryRv();
         setUpAdapter();
         fetchCategoryItems();
@@ -44,7 +43,7 @@ public class CategoryActivity extends AppCompatActivity {
         categoryAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(String categoryName) {
-                Intent intent = new Intent(getApplicationContext(), ProductsActivity.class);
+                Intent intent = new Intent(CategoryActivity.this, ProductsActivity.class);
                 intent.putExtra("category", categoryName);
                 startActivity(intent);
             }
@@ -55,24 +54,6 @@ public class CategoryActivity extends AppCompatActivity {
         binding.categoryRv.setLayoutManager(new LinearLayoutManager(this));
     }
 
-//    private void setUpData() {
-//        categories = new ArrayList<>();
-//        Category electronics = new Category();
-//        electronics.title = "Electronics";
-//        categories.add(electronics);
-//
-//        Category jewelery = new Category();
-//        jewelery.title = "jewelery";
-//        categories.add(jewelery);
-//
-//        Category mensClothing = new Category();
-//        mensClothing.title = "Mens Clothing";
-//        categories.add(mensClothing);
-//
-//        Category womensClothing = new Category();
-//        womensClothing.title = "Women's Clothing";
-//        categories.add(womensClothing);
-//    }
 
     private void fetchCategoryItems() {
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
@@ -83,7 +64,6 @@ public class CategoryActivity extends AppCompatActivity {
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 List<String> strings = response.body();
                 categoryAdapter.setUpData(strings);
-                Toast.makeText(CategoryActivity.this, "Successfully added data", Toast.LENGTH_SHORT).show();
             }
 
             @Override
