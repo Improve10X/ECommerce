@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.google.gson.Gson;
+import com.improve10x.ecommerce.cart.CartProduct;
 import com.improve10x.ecommerce.modelclass.Product;
 import com.improve10x.ecommerce.network.FakeStoreApi;
 import com.improve10x.ecommerce.network.FakeStoreService;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.GET;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -52,5 +54,15 @@ public class ExampleUnitTest {
         Product product = call.execute().body();
         assertNotNull(product);
         System.out.println(new Gson().toJson(product));
+    }
+
+    @Test
+
+    public void getCart() throws IOException {
+        FakeStoreService fakeApiService = new FakeStoreApi().createFakeStoreService();
+        Call<CartProduct> call = fakeApiService.fetchCartProducts();
+        CartProduct categories = call.execute().body();
+        assertNotNull(categories);
+        System.out.println(new Gson().toJson(categories));
     }
 }

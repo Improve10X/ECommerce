@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
+import com.improve10x.ecommerce.BaseActivity;
 import com.improve10x.ecommerce.ProductDetailsActivity;
 import com.improve10x.ecommerce.category.Constants;
 import com.improve10x.ecommerce.databinding.ActivityProducts2Binding;
@@ -21,12 +23,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductsActivity extends AppCompatActivity {
+public class ProductsActivity extends BaseActivity {
 
     private List<Product> products = new ArrayList<>();
     private ActivityProducts2Binding binding;
     private ProductsAdapter productsAdapter;
     private String categoryName;
+
+    private FakeStoreService fakeStoreService;
 
     @Override
 
@@ -34,6 +38,8 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProducts2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getSupportActionBar().setTitle(categoryName);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (getIntent().hasExtra(Constants.KEY_CATEGORY_VALUE)) {
             categoryName = getIntent().getStringExtra(Constants.KEY_CATEGORY_VALUE);
         }
@@ -42,22 +48,31 @@ public class ProductsActivity extends AppCompatActivity {
         setUpProductsRv();
     }
 
+    private void hideProgressBar() {
+        binding.progressbarPb.setVisibility(View.GONE);
+    }
+
+    private void showProgressBar() {
+        binding.progressbarPb.setVisibility(View.VISIBLE);
+    }
+
     private void fetchData() {
+        showProgressBar();
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
-        FakeStoreService fakeStoreService = fakeStoreApi.createFakeStoreService();
+        fakeStoreService = fakeStoreApi.createFakeStoreService();
         Call<List<Product>> call = fakeStoreService.fetchProducts(categoryName);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                hideProgressBar();
                 List<Product> products = response.body();
                 productsAdapter.setUpData(products);
-                Toast.makeText(ProductsActivity.this, "Successfully Fetched the Products", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                Toast.makeText(ProductsActivity.this, "Failed to Load the Data", Toast.LENGTH_SHORT).show();
-
+                hideProgressBar();
+                showToast("Failed to Load the fetch Products");
             }
         });
     }
@@ -69,8 +84,8 @@ public class ProductsActivity extends AppCompatActivity {
         productsAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onClick(int productId) {
-                Intent intent = new Intent(getApplicationContext(), ProductDetailsActivity.class);
-                intent.putExtra(Constants.PRODUCT_KEY_VALUE, productId);
+                Intent intent = new Intent(ProductsActivity.this, ProductDetailsActivity.class);
+                intent.putExtra(Constants.KEY_PRODUCT_VALUE, productId);
                 startActivity(intent);
             }
         });

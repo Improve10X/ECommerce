@@ -17,7 +17,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsViewHolder> {
     private List<Product> products;
     private OnItemActionListener onItemActionListener;
 
-    public void setUpData(List<Product> products) {
+    void setUpData(List<Product> products) {
         this.products = products;
         notifyDataSetChanged();
     }

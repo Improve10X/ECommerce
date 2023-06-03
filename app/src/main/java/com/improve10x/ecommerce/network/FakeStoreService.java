@@ -1,5 +1,6 @@
 package com.improve10x.ecommerce.network;
 
+import com.improve10x.ecommerce.cart.CartProduct;
 import com.improve10x.ecommerce.category.Constants;
 import com.improve10x.ecommerce.modelclass.Product;
 
@@ -19,4 +20,7 @@ public interface FakeStoreService {
 
     @GET("/products/{productId}")
     Call<Product> getProductDetails(@Path("productId") int productId);
+
+    @GET("carts/1?userId=1")
+    Call<CartProduct> fetchCartProducts();
 }

@@ -16,9 +16,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductDetailsActivity extends AppCompatActivity {
+public class ProductDetailsActivity extends BaseActivity {
     private ActivityProductDetailsBinding binding;
     private int productId;
+    private FakeStoreService fakeStoreService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,15 +27,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
         binding = ActivityProductDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Product Details");
-        if (getIntent().hasExtra(Constants.PRODUCT_KEY_VALUE)) {
-            productId = getIntent().getIntExtra(Constants.PRODUCT_KEY_VALUE, 0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getIntent().hasExtra(Constants.KEY_PRODUCT_VALUE)) {
+            productId = getIntent().getIntExtra(Constants.KEY_PRODUCT_VALUE, 0);
         }
         fetchProductDetails();
     }
 
     private void fetchProductDetails() {
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
-        FakeStoreService fakeStoreService = fakeStoreApi.createFakeStoreService();
+        fakeStoreService = fakeStoreApi.createFakeStoreService();
         Call<Product> call = fakeStoreService.getProductDetails(productId);
         call.enqueue(new Callback<Product>() {
             @Override
@@ -44,13 +46,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 binding.priceTxt.setText(String.valueOf(product.getPrice()));
                 binding.descriptionTxt.setText(product.getDescription());
                 binding.detailsRatingbarRv.setRating( product.rating.getRate());
-                binding.countTxt.setText(product.rating.getCount());
                 Picasso.get().load(product.getImageUrl()).into(binding.imageViewImg);
             }
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
-                Toast.makeText(ProductDetailsActivity.this, "Failed to Get the Product Details", Toast.LENGTH_SHORT).show();
+                showToast("Failed to Load the Fetch the Product details");
             }
         });
     }
