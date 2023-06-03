@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class CategoryActivity extends BaseActivity {
 
     private ActivityCategoryBinding binding;
-    private ArrayList<String> categories = new ArrayList<>();
+    private List<Category> categories = new ArrayList<>();
     private CategoryAdapter categoryAdapter;
     private FakeStoreService fakeStoreService;
 
@@ -71,17 +71,17 @@ public class CategoryActivity extends BaseActivity {
         showProgressBar();
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
         fakeStoreService = fakeStoreApi.createFakeStoreService();
-        Call<List<String>> call = fakeStoreService.fetchCategoryItems();
-        call.enqueue(new Callback<List<String>>() {
+        Call<List<Category>> call = fakeStoreService.fetchCategoryItems();
+        call.enqueue(new Callback<List<Category>>() {
             @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 hideProgressBar();
-                List<String> strings = response.body();
+                List<Category> strings = response.body();
                 categoryAdapter.setUpData(strings);
             }
 
             @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
+            public void onFailure(Call<List<Category>> call, Throwable t) {
                 hideProgressBar();
                 showToast("Failed to Load The Fetch category items");
             }

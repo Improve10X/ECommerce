@@ -1,6 +1,7 @@
 package com.improve10x.ecommerce.network;
 
 import com.improve10x.ecommerce.cart.CartProduct;
+import com.improve10x.ecommerce.category.Category;
 import com.improve10x.ecommerce.category.Constants;
 import com.improve10x.ecommerce.modelclass.Product;
 
@@ -12,8 +13,8 @@ import retrofit2.http.Path;
 
 public interface FakeStoreService {
 
-    @GET(Constants.CATEGORY_END_POINT)
-    Call<List<String>> fetchCategoryItems();
+    @GET("api/v1/categories")
+    Call<List<Category>> fetchCategoryItems();
 
     @GET("/products/category/{categoryName}")
     Call<List<Product>> fetchProducts(@Path("categoryName") String categoryName);
