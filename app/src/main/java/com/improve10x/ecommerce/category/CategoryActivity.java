@@ -66,7 +66,6 @@ public class CategoryActivity extends BaseActivity {
         binding.categoryRv.setLayoutManager(new LinearLayoutManager(this));
     }
 
-
     private void fetchCategoryItems() {
         showProgressBar();
         FakeStoreApi fakeStoreApi = new FakeStoreApi();

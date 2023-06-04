@@ -21,11 +21,8 @@ import retrofit2.Response;
 public class CartProductActivity extends AppCompatActivity {
 
     private ActivityCartProductBinding binding;
-
     private CartProductAdapter cartProductAdapter;
-
     private List<ProductDetails> cartProductsDetails = new ArrayList<>();
-
     private FakeStoreService fakeStoreService;
 
     @Override
@@ -50,7 +47,7 @@ public class CartProductActivity extends AppCompatActivity {
         cartProductAdapter.setCartProductData(cartProductsDetails);
     }
 
-    private void fetchCartProducts () {
+    private void fetchCartProducts() {
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
         fakeStoreService = fakeStoreApi.createFakeStoreService();
         Call<CartProduct> call = fakeStoreService.fetchCartProducts();

@@ -45,7 +45,6 @@ public class ProductDetailsActivity extends BaseActivity {
                 binding.titleTxt.setText(product.getTitle());
                 binding.priceTxt.setText(String.valueOf(product.getPrice()));
                 binding.descriptionTxt.setText(product.getDescription());
-               // binding.detailsRatingbarRv.setRating( product.rating.getRate());
                 Picasso.get().load(product.getImageUrl().get(0)).into(binding.imageViewImg);
             }
 

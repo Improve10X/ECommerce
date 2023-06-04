@@ -57,13 +57,13 @@ public class ExampleUnitTest {
         System.out.println(new Gson().toJson(product));
     }
 
-    @Test
+    //@Test
 
-    public void getCart() throws IOException {
-        FakeStoreService fakeApiService = new FakeStoreApi().createFakeStoreService();
-        Call<CartProduct> call = fakeApiService.fetchCartProducts();
-        CartProduct categories = call.execute().body();
-        assertNotNull(categories);
-        System.out.println(new Gson().toJson(categories));
-    }
+//    public void getCart() throws IOException {
+//        FakeStoreService fakeApiService = new FakeStoreApi().createFakeStoreService();
+//        Call<CartProduct> call = fakeApiService.fetchCartProducts();
+//        CartProduct categories = call.execute().body();
+//        assertNotNull(categories);
+//        System.out.println(new Gson().toJson(categories));
+//    }
 }

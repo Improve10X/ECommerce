@@ -16,11 +16,12 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductViewHold
 
     private List<ProductDetails> cartProducts;
 
-    void setCartProductData(List<ProductDetails> productDetails){
+    void setCartProductData(List<ProductDetails> productDetails) {
         cartProducts = productDetails;
         notifyDataSetChanged();
 
     }
+
     @NonNull
     @Override
     public CartProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
