@@ -30,6 +30,8 @@ public class ProductsActivity extends BaseActivity {
     private ProductsAdapter productsAdapter;
     private String categoryName;
 
+    private Integer categoryId;
+
     private FakeStoreService fakeStoreService;
 
     @Override
@@ -60,7 +62,7 @@ public class ProductsActivity extends BaseActivity {
         showProgressBar();
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
         fakeStoreService = fakeStoreApi.createFakeStoreService();
-        Call<List<Product>> call = fakeStoreService.fetchProducts(categoryName);
+        Call<List<Product>> call = fakeStoreService.fetchProducts(categoryId);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {

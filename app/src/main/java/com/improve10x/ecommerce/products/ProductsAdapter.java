@@ -38,11 +38,11 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
         Product product = products.get(position);
-        Picasso.get().load(product.getImageUrl()).into(holder.binding.imageViewImg);
+        Picasso.get().load(product.getImageUrl().get(0)).into(holder.binding.imageViewImg);
         holder.binding.titleTxt.setText(product.getTitle());
-        holder.binding.countTxt.setText(String.valueOf(product.rating.getCount()));
+        holder.binding.countTxt.setText(product.getDescription());
         holder.binding.priceTxt.setText(String.valueOf(product.getPrice()));
-        holder.binding.ratingBarRb.setRating(product.rating.getRate());
+        //holder.binding.ratingBarRb.setRating(product.rating.getRate());
         holder.binding.getRoot().setOnClickListener(v -> {
             onItemActionListener.onClick(product.getId());
 

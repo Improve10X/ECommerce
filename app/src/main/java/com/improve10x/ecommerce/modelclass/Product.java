@@ -1,14 +1,28 @@
 package com.improve10x.ecommerce.modelclass;
 
+import android.widget.ImageView;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class Product {
 
     private Integer id;
     private String title;
     private Float price;
-    @SerializedName("image")
-    private String imageUrl;
+    @SerializedName("images")
+    private ArrayList<String> imageUrl;
+
+    @SerializedName("images")
+    public ArrayList<String> getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(ArrayList<String> imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public Rating rating;
     private String description;
 
@@ -46,11 +60,5 @@ public class Product {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }
