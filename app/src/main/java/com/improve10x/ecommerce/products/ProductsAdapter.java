@@ -40,7 +40,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsViewHolder> {
         Product product = products.get(position);
         Picasso.get().load(product.getImageUrl().get(0)).into(holder.binding.imageViewImg);
         holder.binding.titleTxt.setText(product.getTitle());
-        holder.binding.countTxt.setText(product.getDescription());
+        holder.binding.descriptionTxt.setText(product.getDescription());
         holder.binding.priceTxt.setText(String.valueOf(product.getPrice()));
         //holder.binding.ratingBarRb.setRating(product.rating.getRate());
         holder.binding.getRoot().setOnClickListener(v -> {
@@ -48,7 +48,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsViewHolder> {
 
         });
     }
-
     @Override
     public int getItemCount() {
         return products.size();

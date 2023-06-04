@@ -14,13 +14,11 @@ import com.improve10x.ecommerce.network.FakeStoreApi;
 import com.improve10x.ecommerce.network.FakeStoreService;
 
 public class BaseActivity extends AppCompatActivity {
-   // public FakeStoreService fakeStoreService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        setUpFakeApiService();
     }
 
     @Override
@@ -45,8 +43,5 @@ public class BaseActivity extends AppCompatActivity {
 
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    private void setUpFakeApiService() {
     }
 }

@@ -37,7 +37,7 @@ public class ProductDetailsActivity extends BaseActivity {
     private void fetchProductDetails() {
         FakeStoreApi fakeStoreApi = new FakeStoreApi();
         fakeStoreService = fakeStoreApi.createFakeStoreService();
-        Call<Product> call = fakeStoreService.getProductDetails(productId);
+        Call<Product> call = fakeStoreService.getProductDetails(1);
         call.enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
@@ -45,8 +45,8 @@ public class ProductDetailsActivity extends BaseActivity {
                 binding.titleTxt.setText(product.getTitle());
                 binding.priceTxt.setText(String.valueOf(product.getPrice()));
                 binding.descriptionTxt.setText(product.getDescription());
-                binding.detailsRatingbarRv.setRating( product.rating.getRate());
-                Picasso.get().load(product.getImageUrl().indexOf(0)).into(binding.imageViewImg);
+               // binding.detailsRatingbarRv.setRating( product.rating.getRate());
+                Picasso.get().load(product.getImageUrl().get(0)).into(binding.imageViewImg);
             }
 
             @Override
